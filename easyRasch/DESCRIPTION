@@ -1,0 +1,16 @@
+Package: easyRasch
+Title: Estimating the ability of respondents to get the answers right
+Version: 0.1
+Date: 03-27-2017
+Author: Hyunjoo Oh
+Maintainer: Hyunjoo Oh <hyunjoo.oh@wustl.edu>
+Description: Estimating the parameters which measure the ability of respondents to get correct answers for the questions of more or less difficulty 
+Depends:
+    R (>= 3.0.0),
+    methods
+License: GPL (>= 2)
+Suggests:
+    devtools
+Collate:
+
+RoxygenNote: 5.0.1
