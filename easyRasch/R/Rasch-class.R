@@ -11,6 +11,8 @@
 #' }
 #' 
 #' @author Hyunjoo Oh: \email{hyunjoo.oh@wustl.edu}
+#' @note We assume that we know the difficulty parameters, a; 
+#' we have observed the answers of a respondent, y
 #' @aliases Rasch-class initialize,Rasch-method showRasch,Rasch-method
 #' @rdname Rasch
 #' @export
