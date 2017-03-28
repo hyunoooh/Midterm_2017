@@ -12,5 +12,10 @@ License: GPL (>= 2)
 Suggests:
     devtools
 Collate:
-
+    'EAP.R'
+    'Likelihood.R'
+    'Plot.R'
+    'Prior.R'
+    'Probability.R'
+    'Rasch-class.R'
 RoxygenNote: 5.0.1
