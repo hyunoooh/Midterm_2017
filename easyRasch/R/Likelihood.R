@@ -21,9 +21,9 @@
 #' Harry <- new("Rasch", name = 'Harry', a = a, y = as.numeric(c(sample(c(0,1), size=10, replace = TRUE))))
 #' Ron <- new("Rasch", name = 'Ron', a = a, y = as.numeric(c(sample(c(0,1), size=10, replace = TRUE))))
 #' Hermione <- new("Rasch", name = "Hermione", a = a, y = as.numeric(c(sample(c(0,1), size=10, replace = TRUE))))
-#' Likelihood(Harry, 1)
-#' Likelihood(Ron, 0.5)
-#' Likelihood(Hermione, 3)
+#' Likelihood(Harry, theta = 1)
+#' Likelihood(Ron, theta = 0.5)
+#' Likelihood(Hermione, theta = 3)
 #' 
 #' @aliases Likelihood,ANY-method
 #' @rdname Likelihood
@@ -34,13 +34,14 @@ setGeneric(name = "Likelihood",
 
 #' @export
 setMethod(f = "Likelihood",
+          # Likelihood is the joint probability of all the observed responses given our guess of theta
           definition = function(raschObj, theta, ...){
-            Likeli.table <- showRasch(raschObj)
+            # the probability a test-taker get the right answer, P
             P <- exp(theta - raschObj@a)/(1+exp(theta - raschObj@a))
+            # the probability a test-taker get the wrong answer, Q
             Q <- 1-P
-            Likeli.table <- rbind(Likeli.table, P, Q)
-            row.names(Likeli.table) <- c("a", "y", "P", "Q")
-            L <- t(Likeli.table[3,])%*%Likeli.table[4,]
-            print(L)
+            PQ <- ifelse((raschObj@y==1), P, Q) # if they got the correct answer, P
+                                                # if they got the wrong answer, Q
+            print(sum(PQ)) # Likelihood = sum of PQ
           }
 )

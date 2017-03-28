@@ -7,7 +7,6 @@
 #' @author Hyunjoo Oh: \email{hyunjoo.oh@wustl.edu}
 #' @seealso \code{\link{Probability}}, \code{\link{Likelihood}}
 #' @examples 
-#' 
 #' Prior(theta = 1)
 #' Prior(theta = 10)
 #' Prior(theta = 5)
@@ -22,10 +21,11 @@ setGeneric(name = "Prior",
 #' @export
 setMethod(f = "Prior",
           definition = function(theta, ...){
-            prior <- dnorm(theta, mean=1, sd=3)  
+            prior <- dnorm(theta, mean=0, sd=3)  
             # Given a set of values dnorm() returns 
             # the height of the probability distribution at each point.
             # mean=0 and sd=3 are given.
             print(prior)
           }
 )
+

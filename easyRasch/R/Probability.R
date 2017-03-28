@@ -21,9 +21,9 @@
 #' Harry <- new("Rasch", name = 'Harry', a = a, y = as.numeric(c(sample(c(0,1), size=10, replace = TRUE))))
 #' Ron <- new("Rasch", name = 'Ron', a = a, y = as.numeric(c(sample(c(0,1), size=10, replace = TRUE))))
 #' Hermione <- new("Rasch", name = "Hermione", a = a, y = as.numeric(c(sample(c(0,1), size=10, replace = TRUE))))
-#' Probability(Harry, 1)
-#' Probability(Ron, 0.5)
-#' Probability(Hermione, 3)
+#' Probability(Harry, theta = 1)
+#' Probability(Ron, theta = 0.5)
+#' Probability(Hermione, theta = 3)
 #' 
 #' @aliases Probability,ANY-method
 #' @rdname Probability
@@ -35,12 +35,16 @@ setGeneric(name = "Probability",
 #' @export
 setMethod(f = "Probability",
           definition = function(raschObj, theta, ...){
+                            # the output will be produced as a matrix
                             Prob.table <- showRasch(raschObj)
+                            # the probability a test-taker get the right answer, P
                             P <- exp(theta - raschObj@a)/(1+exp(theta - raschObj@a))
+                            # the probability a test-taker get the wrong answer, Q
                             Q <- 1-P
-                            PQ <- ifelse((raschObj@y==1), P, Q)
+                            PQ <- ifelse((raschObj@y==1), P, Q) # if they got the correct answer, P
+                                                                # if they got the wrong answer, Q
                             Prob.table <- rbind(Prob.table, P, PQ)
                             row.names(Prob.table) <- c("a", "y", "P", "P or Q")
-                            print(Prob.table)
+                            print(Prob.table) # output is a matrix
                             }
           )
